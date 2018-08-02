@@ -451,7 +451,6 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getFragment());
 	}
 	
-	
 
 	/**
 	 * 
