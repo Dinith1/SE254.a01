@@ -97,6 +97,77 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testSchemeOnly() {
+		uri = parser.parse("http:");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuthorityOnly() {
+		uri = parser.parse("//www.cs.auckland.ac.nz");
+		assertNull(uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testPathOnly() {
+		uri = parser.parse("/news/index.php");
+		assertNull(uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertEquals("/news/index.php", uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testQueryOnly() {
+		uri = parser.parse("?item=199");
+		assertNull(uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertNull(uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testFragmentOnly() {
+		uri = parser.parse("#testFrag");
+		assertNull(uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
 
 
 	/**
@@ -111,7 +182,14 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoSchemeNo
+	
 
 	/**
 	 * Test 
