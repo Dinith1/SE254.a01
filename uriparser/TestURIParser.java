@@ -43,7 +43,7 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		} catch(ParseException e) {}
 	}
 
-	
+
 	/**
 	 * 
 	 */
@@ -83,8 +83,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -100,7 +100,7 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * Test a string with an empty scheme. This should **************************  
+	 * Test a string with no scheme. This should **************************  
 	 */
 	@Test
 	public void testNoScheme() {
@@ -111,10 +111,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * Test
+	 * Test 
 	 */
 	@Test
 	public void testNoAuthority() {
@@ -125,8 +125,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -140,7 +140,7 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("testFrag", uri.getFragment());
 	}
 
-	
+
 	/**
 	 * 
 	 */
@@ -153,8 +153,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -167,8 +167,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * Test a string with an empty scheme. This should **************************  
 	 */
@@ -181,8 +181,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -195,11 +195,11 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	// Empty path = no path
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -212,8 +212,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -226,8 +226,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -240,8 +240,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -254,8 +254,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -268,8 +268,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -282,8 +282,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -296,8 +296,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -310,8 +310,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -324,8 +324,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -338,8 +338,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -352,8 +352,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("://www.cs.auckland.ac.nz/news/index.php?item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -366,8 +366,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("://www.cs.auckland.ac.nz/news/index.php?item=199#testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * ***************************** REDUNDANT
 	 */
@@ -380,8 +380,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("/news/index.php?item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -394,8 +394,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -408,8 +408,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -422,8 +422,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -442,7 +442,35 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 	 * 
 	 */
 	@Test
-	public void testSchemeWithEmptyQuery() {
+	public void testSchemeAndEmptyAuthority() {
+		uri = parser.parse("http://");
+		assertEquals("http", uri.getScheme());
+		assertEquals("", uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	/**
+	 * www.cs.auckland.ac.nz/news/index.php?item=199#testFrag
+	 */
+	@Test
+	public void testSchemeAndAuthority() {
+		uri = parser.parse("http://www.www.cs.auckland.ac.nz");
+		assertEquals("http", uri.getScheme());
+		assertEquals("www.www.cs.auckland.ac.nz", uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSchemeAndEmptyQuery() {
 		uri = parser.parse("http:?");
 		assertEquals("http", uri.getScheme());
 		assertNull(uri.getAuthority());
@@ -451,12 +479,26 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getFragment());
 	}
 	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testSchemeAndQuery() {
+		uri = parser.parse("http:?item=199");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertNull(uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSchemeWithEmptyFragment() {
+	public void testSchemeAndEmptyFragment() {
 		uri = parser.parse("http:#");
 		assertEquals("http", uri.getScheme());
 		assertNull(uri.getAuthority());
@@ -466,7 +508,40 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 	}
 	
 	
+	/**
+	 * 
+	 */
+	@Test
+	public void testSchemeAndFragment() {
+		uri = parser.parse("http:#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
 	
 	
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testSchemeAndPath() {
+		uri = parser.parse("http:/news/index.php");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority());
+		assertEquals("/news/index.php", uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
+	}
+	
+	
+	
+
+
+
+
 }
 
