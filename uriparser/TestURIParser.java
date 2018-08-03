@@ -23,7 +23,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 	URIParser parser;
 	URI uri;
-
+	/**
+	 * This method is run before every test, so a new URIParser object is made before
+	 * each test.
+	 */
 	@Before
 	public void setUp() {
 		parser = new URIParser();
@@ -32,7 +35,7 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 	/**
 	 * Test the parse method to make sure it throws a @see uriparser.ParseException
-	 * when null is the input to the @see uriparser.URIParser#parse(java.lang.String);
+	 * when null is the input to the @see uriparser.URIParser#parse(java.lang.String)
 	 */
 	@Test
 	public void testNull() {
@@ -44,19 +47,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
-	 */
-	@Test
-	public void testSpace() {
-		try {
-			uri = parser.parse(" ");
-			fail("Doesn't throw ParseException");
-		} catch(ParseException e) {}
-	}
-
-
-	/**
-	 * Test a URI with non empty strings for all parts of the URI.
+	 * Test a URI with all parts of the URI present and not empty. This makes sure
+	 * the parser can parse the most basic URI. 
 	 */
 	@Test
 	public void testNormal() {
@@ -70,8 +62,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * Test an empty string URI, where all parts of the URI should
-	 * then be null.
+	 * Test an empty string URI, to make sure all parts of the URI should then be null, 
+	 * as none of the syntax for scheme, authority, query and fragment are 
+	 * present, and it is not possible to have an empty path.
 	 */
 	@Test
 	public void testEmptyString() {
@@ -85,7 +78,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with all of the URI syntax, but with each part being empty.
+	 * It is not possible to have and empty scheme, as the colon character is 
+	 * legal for paths, meaning anything after the colon that is legal for path (:, /)
+	 * will count as the path.
 	 */
 	@Test
 	public void testEmptyAll() {
@@ -96,10 +92,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with only a scheme present. It should not be possible
+	 * to produce an empty path (after the colon). All parts apart from scheme
+	 * should be null.
 	 */
 	@Test
 	public void testSchemeOnly() {
@@ -110,10 +108,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string where only an authority is present. This again enforces
+	 * the no-empty-path rule, and makes sure a null scheme can be produced
+	 * with a non-null authority.
 	 */
 	@Test
 	public void testAuthorityOnly() {
@@ -124,10 +124,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with a path only. Makes sure that the URIParser class
+	 * only produces a non-null authority when a string follows two forward
+	 * slashes.
 	 */
 	@Test
 	public void testPathOnly() {
@@ -138,10 +140,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with only a query. Makes sure that the URIParser class
+	 * allows only a query to be produced, where all other parts of the URI
+	 * are null.
 	 */
 	@Test
 	public void testQueryOnly() {
@@ -152,10 +156,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with only a fragment. Makes sure that the URIParser class
+	 * allows only a fragment to be produced, where all other parts of the URI
+	 * are null.
 	 */
 	@Test
 	public void testFragmentOnly() {
@@ -166,11 +172,13 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
+
 
 
 	/**
-	 * Test a string with no scheme. This should **************************  
+	 * Test a string with no scheme, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while scheme 
+	 * is null.
 	 */
 	@Test
 	public void testNoScheme() {
@@ -181,10 +189,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no scheme nor authority, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while scheme and authority
+	 * are null.
 	 */
 	@Test
 	public void testNoSchemeNoAuthority() {
@@ -195,10 +205,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no scheme nor path, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while scheme and path
+	 * are null.
 	 */
 	@Test
 	public void testNoSchemeNoPath() {
@@ -209,10 +221,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no scheme nor query, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while scheme and query
+	 * are null
 	 */
 	@Test
 	public void testNoSchemeNoQuery() {
@@ -223,10 +237,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no scheme nor fragment, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while scheme and fragment
+	 * are null
 	 */
 	@Test
 	public void testNoSchemeNoFragment() {
@@ -237,10 +253,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
+
 
 	/**
-	 * Test 
+	 * Test a string with no authority, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while authority 
+	 * is null
 	 */
 	@Test
 	public void testNoAuthority() {
@@ -251,10 +269,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * Test 
+	 * Test a string with no authority nor path, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while authority and path 
+	 * are null
 	 */
 	@Test
 	public void testNoAuthorityNoPath() {
@@ -265,10 +285,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * Test 
+	 * Test a string with no authority nor query, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while authority and query 
+	 * are null 
 	 */
 	@Test
 	public void testNoAuthorityNoQuery() {
@@ -279,10 +301,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * Test 
+	 * Test a string with no authority nor fragment, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while authority and fragment
+	 * are null
 	 */
 	@Test
 	public void testNoAuthorityNoFragment() {
@@ -296,7 +320,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with no path, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while path 
+	 * is null
 	 */
 	@Test
 	public void testNoPath() {
@@ -307,10 +333,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no path nor query, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while path and query
+	 * are null
 	 */
 	@Test
 	public void testNoPathNoQuery() {
@@ -321,10 +349,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no path nor fragment, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while path and fragment
+	 * are null
 	 */
 	@Test
 	public void testNoPathNoFragment() {
@@ -338,7 +368,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with no query, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while query
+	 * is null
 	 */
 	@Test
 	public void testNoQuery() {
@@ -349,10 +381,12 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
-	 * 
+	 * Test a string with no query nor fragment, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while query and fragment
+	 * are null
 	 */
 	@Test
 	public void testNoQueryNoFragment() {
@@ -366,7 +400,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with no fragment, but all other parts present. Should still
+	 * allow all other parts of the URI to be produced normally, while fragment
+	 * is null
 	 */
 	@Test
 	public void testNoFragment() {
@@ -380,7 +416,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * Test a string with an empty scheme. This should **************************  
+	 * Test a string with an empty scheme. This should produce a null scheme and
+	 * authority, as : and / are legal characters for the path, and all other parts
+	 * are not null. 
 	 */
 	@Test
 	public void testEmptyScheme() {
@@ -394,7 +432,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty authority. This should produce a URI object
+	 * with no parts being null, as having an empty authority is legal.
 	 */
 	@Test
 	public void testEmptyAuthority() {
@@ -407,11 +446,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 	}
 
 
-	// Empty path = no path
-
-
 	/**
-	 * 
+	 * Test a string with an empty query. This should produce a URI object
+	 * with no parts being null, as having an empty query is legal.
 	 */
 	@Test
 	public void testEmptyQuery() {
@@ -425,7 +462,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty fragment. This should produce a URI object
+	 * with no parts being null, as having an empty fragment is legal.
 	 */
 	@Test
 	public void testEmptyFragment() {
@@ -439,7 +477,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty authority and path. This should produce a URI object
+	 * with only path being null, as having an empty path is not possible.
 	 */
 	@Test
 	public void testEmptyAuthorityAndPath() {
@@ -453,7 +492,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty authority and query. This should produce a URI object
+	 * with no parts being null, as having an empty authority and query is legal.
 	 */
 	@Test
 	public void testEmptyAuthorityAndQuery() {
@@ -467,7 +507,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty authority and fragment. This should produce a URI object
+	 * with no parts being null, as having an empty authority and fragment is legal.
 	 */
 	@Test
 	public void testEmptyAuthorityAndFragment() {
@@ -481,7 +522,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with an empty query and fragment. This should produce a URI object
+	 * with no parts being null, as having an empty query and fragment is legal.
 	 */
 	@Test
 	public void testEmptyQueryAndFragment() {
@@ -495,7 +537,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with no authority and a path with no forward slash at the start.
+	 * This should produce a null authority with all other parts not null and not empty.
+	 * A path isn't required to start with a forward slash.
 	 */
 	@Test
 	public void testNoAuthorityPathWithNoSlash() {
@@ -509,7 +553,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with no query nor fragment. This should produce a URI
+	 * with only query and fragment being null, as they are not required for
+	 * a URI.
 	 */
 	@Test 
 	public void testNoQueryAndFragment() {
@@ -523,7 +569,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the scheme is one character long. This should be
+	 * allowed as scheme needs to be at least one character, so all parts
+	 * of the URI should be non null.
 	 */
 	@Test
 	public void testSchemeOneCharacter() {
@@ -537,7 +585,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the scheme is only a forward slash character. This should
+	 * produce a null scheme and authority, as forward slash is an illegal character
+	 * for schemes, but not for paths, meaning the start of the string should
+	 * be the path.
 	 */
 	@Test
 	public void testSchemeWithSlash() {
@@ -551,7 +602,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the scheme is only a question mark character. THis should 
+	 * produce a null scheme, authority and path, as question mark is an illegal character
+	 * for scheme. Everything after the question mark that is not a hash character
+	 * should be the query.
 	 */
 	@Test
 	public void testSchemeWithQuestion() {
@@ -576,8 +630,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("://www.cs.auckland.ac.nz/news/index.php?item=199#testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -604,8 +658,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("/news/index.php?item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * T
 	 */
@@ -674,8 +728,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -688,8 +742,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * www.cs.auckland.ac.nz/news/index.php?item=199#testFrag
 	 */
@@ -716,8 +770,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("", uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -744,8 +798,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("", uri.getFragment());
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -758,10 +812,10 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * 
 	 */
@@ -774,9 +828,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-	
-	
-	
+
+
+
 
 
 
