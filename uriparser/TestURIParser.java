@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -188,7 +187,56 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 	 * 
 	 */
 	@Test
-	public void testNoSchemeNo
+	public void testNoSchemeNoAuthority() {
+		uri = parser.parse("/news/index.php?item=199#testFrag");
+		assertNull(uri.getScheme());
+		assertNull(uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoSchemeNoPath() {
+		uri = parser.parse("//www.cs.auckland.ac.nz?item=199#testFrag");
+		assertNull(uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertNull(uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoSchemeNoQuery() {
+		uri = parser.parse("//www.cs.auckland.ac.nz/news/index.php#testFrag");
+		assertNull(uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoSchemeNoFragment() {
+		uri = parser.parse("//www.cs.auckland.ac.nz/news/index.php?item=199");
+		assertNull(uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertNull(uri.getFragment());
+	}
 	
 
 	/**
@@ -202,6 +250,48 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("/news/index.php", uri.getPath());
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * Test 
+	 */
+	@Test
+	public void testNoAuthorityNoPath() {
+		uri = parser.parse("http:?item=199#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority()); 
+		assertNull(uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * Test 
+	 */
+	@Test
+	public void testNoAuthorityNoQuery() {
+		uri = parser.parse("http:/news/index.php#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * Test 
+	 */
+	@Test
+	public void testNoAuthorityNoFragment() {
+		uri = parser.parse("http:/news/index.php?item=199");
+		assertEquals("http", uri.getScheme());
+		assertNull(uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertNull(uri.getFragment());
 	}
 
 
@@ -217,6 +307,34 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
 	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoPathNoQuery() {
+		uri = parser.parse("http://www.cs.auckland.ac.nz#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoPathNoFragment() {
+		uri = parser.parse("http://www.cs.auckland.ac.nz?item=199");
+		assertEquals("http", uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertNull(uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertNull(uri.getFragment());
+	}
 
 
 	/**
@@ -230,6 +348,20 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertEquals("/news/index.php", uri.getPath());
 		assertNull(uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testNoQueryNoFragment() {
+		uri = parser.parse("http://www.cs.auckland.ac.nz/news/index.php");
+		assertEquals("http", uri.getScheme());
+		assertEquals("www.cs.auckland.ac.nz", uri.getAuthority()); 
+		assertEquals("/news/index.php", uri.getPath());
+		assertNull(uri.getQuery());
+		assertNull(uri.getFragment());
 	}
 
 
@@ -444,10 +576,24 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertEquals("://www.cs.auckland.ac.nz/news/index.php?item=199#testFrag", uri.getFragment());
 	}
+	
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuthorityWithColon() {
+		uri = parser.parse("http://:/news/index.php?item=199#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertEquals(":", uri.getAuthority());
+		assertEquals("/news/index.php", uri.getPath());
+		assertEquals("item=199", uri.getQuery());
+		assertEquals("testFrag", uri.getFragment());
+	}
 
 
 	/**
-	 * ***************************** REDUNDANT
+	 * 
 	 */
 	@Test
 	public void testAuthorityWithQuestion() {
@@ -457,6 +603,20 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getPath());
 		assertEquals("/news/index.php?item=199", uri.getQuery());
 		assertEquals("testFrag", uri.getFragment());
+	}
+	
+	
+	/**
+	 * T
+	 */
+	@Test
+	public void testAuthorityWithHash() {
+		uri = parser.parse("http://#/news/index.php?item=199#testFrag");
+		assertEquals("http", uri.getScheme());
+		assertEquals("", uri.getAuthority());
+		assertNull(uri.getPath());
+		assertNull(uri.getQuery());
+		assertEquals("/news/index.php?item=199#testFrag", uri.getFragment());
 	}
 
 
