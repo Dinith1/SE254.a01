@@ -602,7 +602,7 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * Test a string where the scheme is only a question mark character. THis should 
+	 * Test a string where the scheme is only a question mark character. This should 
 	 * produce a null scheme, authority and path, as question mark is an illegal character
 	 * for scheme. Everything after the question mark that is not a hash character
 	 * should be the query.
@@ -619,7 +619,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the scheme is only a hash mark character. This should 
+	 * produce a null scheme, authority, path and query as hash is an illegal character
+	 * for scheme. Everything after the hash should be the fragment.
 	 */
 	@Test
 	public void testSchemeWithHash() {
@@ -633,7 +635,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the authority contains a colon only. This should produce
+	 * a URI with all parts not null, as colon is legal for authorities.
 	 */
 	@Test
 	public void testAuthorityWithColon() {
@@ -647,7 +650,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string where the authority contains a question mark only. This should
+	 * produce an empty authority as question mark is an illegal character for authorities,
+	 * a null path, as there are no characters between the // and ?.
 	 */
 	@Test
 	public void testAuthorityWithQuestion() {
@@ -661,7 +666,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * T
+	 * Test a string where the authority contains a hash. This should
+	 * produce an empty authority as hash is an illegal character for authorities,
+	 * a null path and query as there are no characters between the // and #.
 	 */
 	@Test
 	public void testAuthorityWithHash() {
@@ -675,7 +682,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string containing only a colon. This should produce a URI with 
+	 * all null parts except for the path, as colon is legal for paths.
 	 */
 	@Test
 	public void testColon() {
@@ -689,7 +697,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string containing only a forward slash. This should produce a URI with 
+	 * all null parts except for the path, as forward slash is legal for paths.
 	 */
 	@Test
 	public void testSlash() {
@@ -703,7 +712,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string containing only a question mark. This should produce a URI with 
+	 * all null parts except for the query, which should be empty.
 	 */
 	@Test
 	public void testQuestion() {
@@ -717,7 +727,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string containing only a hash. This should produce a URI with 
+	 * all null parts except for the fragment, which should be empty.
 	 */
 	@Test
 	public void testHash() {
@@ -731,7 +742,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with legal scheme and empty authority only. This should produce a URI
+	 * with null path, query and fragment, and empty authority.
 	 */
 	@Test
 	public void testSchemeAndEmptyAuthority() {
@@ -745,7 +757,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * www.cs.auckland.ac.nz/news/index.php?item=199#testFrag
+	 * Test a string with legal scheme and a non-empty authority only. This should produce a URI
+	 * with null path, query and fragment, and non-empty authority.
 	 */
 	@Test
 	public void testSchemeAndAuthority() {
@@ -759,7 +772,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with legal scheme and empty query only. This should produce a URI
+	 * with null authority, path and fragment, and empty query.
 	 */
 	@Test
 	public void testSchemeAndEmptyQuery() {
@@ -773,7 +787,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with legal scheme and non-empty query only. This should produce a URI
+	 * with null authority, path and fragment, and non-empty query.
 	 */
 	@Test
 	public void testSchemeAndQuery() {
@@ -787,7 +802,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with legal scheme and empty fragment only. This should produce a URI
+	 * with null authority, path and query, and empty fragment.
 	 */
 	@Test
 	public void testSchemeAndEmptyFragment() {
@@ -801,7 +817,8 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 
 
 	/**
-	 * 
+	 * Test a string with legal scheme and non-empty fragment only. This should produce a URI
+	 * with null authority, path and query, and non-empty fragment.
 	 */
 	@Test
 	public void testSchemeAndFragment() {
@@ -814,10 +831,9 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 	}
 
 
-
-
 	/**
-	 * 
+	 * Test a string with only a legal scheme and path. This should produce a URI
+	 * with null authority, query and fragment, and non-empty scheme and path.
 	 */
 	@Test
 	public void testSchemeAndPath() {
@@ -828,12 +844,6 @@ public class TestURIParser {// DO NOT CHANGE THE CLASS NAME OR YOU WILL GET ZERO
 		assertNull(uri.getQuery());
 		assertNull(uri.getFragment());
 	}
-
-
-
-
-
-
 
 }
 
